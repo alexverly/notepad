@@ -15,10 +15,8 @@ $(document).ready(function () {
         for (noteCount = 0; noteCount < localStorage.length; noteCount++) {
           var noteID        = 'task-' + noteCount;
 
-          // Build note list
           $noteList.append("<li class='notepad__list-item' id='" + noteID + "'>" + localStorage.getItem(noteID) + "</li>");
 
-          // Show reset button
           $clearList.addClass( clearListDisplay );
         }
       }
@@ -31,15 +29,12 @@ $(document).ready(function () {
 
             localStorage.setItem( noteID, taskMessage );
 
-            // Add to note list
             $noteList.append( "<li class='notepad__list-item' id='" + noteID + "'>" + taskMessage + "</li>" );
 
-            // Display reset button
             if ( !$clearList.hasClass( clearListDisplay ) ) {
               $clearList.addClass( clearListDisplay );
             }
 
-            // Reset
             $noteFormInput.val('');
             noteCount++;
         }
@@ -47,27 +42,22 @@ $(document).ready(function () {
 
       function clearNotes() {
 
-          // Update DOM
           $noteList.empty();
           $clearList.removeClass( clearListDisplay );
 
-          // Clear storage
           localStorage.clear();
           noteCount = 0;
       }
 
       function bindEvents() {
 
-        // Show any existing notes from localStorage
         displayNotes();
 
-        // Create new note
         $noteForm.on( 'submit', function () {
             storeNote();
             return false;
         });
 
-        // Reset notes
         $clearList.on( 'click', function () {
           clearNotes();
         });
